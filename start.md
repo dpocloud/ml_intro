@@ -5,14 +5,14 @@ email:
 date:     21/02/2025
 version:  0.0.1
 language: en
-narrator: Russian
+narrator: English
 
 repository: https://github.com/dpocloud/ml_intro
 
 icon:    img/logo_mephi2.png
 logo:    img/logo_ml_intro.png
 
-comment:  курс "Введение в машинное обучение"
+comment:  Курс "Введение в машинное обучение"
 
 script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
           https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
