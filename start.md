@@ -4,7 +4,7 @@ author:   Daria Gudkova, Alexander Trofimov
 email:    
 date:     21/02/2025
 version:  0.0.1
-language: ru
+language: en
 narrator: Russian
 
 repository: https://github.com/dpocloud/ml_intro
