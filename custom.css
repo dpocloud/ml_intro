@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: 'Verdana', sans-serif !important;
+  font-family: 'Georgia', sans-serif !important;  
 }
 
 h1.lia-h1 {
@@ -24,16 +24,6 @@ h1.lia-h1 {
   background: var(--main-bg-color) !important;
 }
 
-.lia-active {
-  background: var(--main-bg-color) !important;
-}
-
-.lia-quote {
-  background: var(--main-bg-color) !important;
-  border-left-color: #990000 !important;
-  color: #FFFFFF !important
-}
-
 .lia-accordion {
   background: var(--main-bg-color) !important;
   font-size: 12px !important;
@@ -50,4 +40,88 @@ h1.lia-h1 {
 
 .lia-link {
   /* color: #00FF00 !important */
+}
+
+
+
+/* ---------------------------------------------------------------------------------- */
+.lia-toc {
+  line-height: 1.1;
+  font-family: 'Georgia', sans-serif !important;
+}
+
+.lia-active {
+  color: #55BBDD !important;
+}
+
+.lia-pagination__content {
+  background: #55BBDD !important;
+}
+
+/* ---------------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Georgia', sans-serif !important;
+  line-height: 1.1 !important;
+}
+
+h4, h5, h6 {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.lia-slide__content {
+  font-family: 'Georgia', sans-serif !important;
+}
+
+.lia-paragraph {
+  text-indent: 35px;
+}
+
+li .lia-paragraph {
+  text-indent: 0;
+}
+
+.lia-figure {
+  text-align: center;
+}
+
+.lia-effect__circle {
+  background: #55BBDD !important;
+}
+
+.lia-quote {
+  background: #eefaee !important;
+  border-left-color: #990000 !important;
+  border-radius: 10px;
+}
+
+/* .lia-quote .lia-paragraph:first-of-type {
+  text-indent: 0;
+} */
+
+/* ---------------------------------------------------------------------------------- */
+.imgCentered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.imgCentered75 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 75%;
+}
+
+.imgCentered100 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
 }
