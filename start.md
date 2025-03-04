@@ -10,8 +10,8 @@ narrator:   English
 
 repository: https://github.com/dpocloud/ml_intro
 
-icon:    ./logo_mephi2.png
-logo:    ./logo_ml_intro.png
+icon:    ./icon.png
+logo:    ./course_logo.png
 
 comment:  Курс "Введение в машинное обучение"
 
