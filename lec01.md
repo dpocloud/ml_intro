@@ -8,8 +8,6 @@ version:    0.1
 language:   en
 narrator:   English
 
-repository: https://github.com/dpocloud/ml_intro
-
 icon:    ./icon.png
 logo:    ./course_logo.png
 
@@ -19,55 +17,8 @@ link:     ./custom.css
 
 import:   ./macro.md
 
-
 -->
 
-** **<!-- ======================================================================================  -->
-** **<!-- Страница курса  -->
-
-# Введение в машинное обучение
------
-
-<h3 style="text-align: center;">Добро пожаловать на курс **"Введение в машинное обучение"**!</h3>
-
-!?[Course Intro](https://www.youtube.com/watch?v=8pTEmbeENF4)
-
-Машинное обучение - подраздел искусственного интеллекта, изучающий методы построения моделей и алгоритмов, способных обучаться. Методы машинного обучения используются при решении широкого круга прикладных задач, для которых разработка явного алгоритма решения затруднительна или невозможна. И этот круг задач постоянно расширяется. Повсеместная информатизация приводит к накоплению огромных объёмов данных в науке, производстве, бизнесе, транспорте, здравоохранении.
-
-В курсе рассматриваются основные принципы машинного обучения с учителем, изучаются постановки задач регрессии и классификации и используемые для их решения модели и методы обучения, а также оценки качества обученных моделей, рассматриваются особенности организации процесса обучения с учителем и применения методов машинного обучения для решения практических задач. Изложение ведется строгим математическим языком, сопровождается множеством формул и математических выкладок.
-
-Учебный курс ставит также своей целью приобретение умений ставить практические задачи в терминах машинного обучения, освоение студентами практических приемов построения моделей машинного обучения и оценки их качества. Выполняемые студентами задания позволяют получить практический опыт по созданию и экспериментальному исследованию свойств обучающихся моделей и методов обучения.
-
------
-<h3 style="text-align: center;">Разделы курса</h3>
-
-1. Введение в машинное обучение
-2. Основные парадигмы машинного обучения
-3. Обучение с учителем: основные принципы
-4. Обучение с учителем: регрессия
-5. Диагностика регрессионных моделей
-6. Бинарная классификация
-7. Многоклассовая классификация
-8. Байесовская классификация
-9. Логистическая регрессия
-
------
-<br/>
-| | |
-| **Продолжительность курса** | 48 ак.ч. |
-| **Автор(ы)** | к.т.н., доцент Трофимов Александр Геннадьевич |
-| **Верстка** | Гудкова Дарья, Трофимов Александр Геннадьевич |
-| **Версия** | 0.1 |
-| **Дата изменения** | март 2025 г. |
-
-[qr-code](https://LiaScript.github.io)
-
------
-
-😀⭐
-
-** **<!-- ======================================================================================  -->
-** **<!-- Страница раздела  -->
 
 ## Введение в машинное обучение
 -----
@@ -654,97 +605,3 @@ $$ D = \{ (x^{(1)}, y^{(1)}), ... , (x^{(n)}, y^{(n)}) \},$$
 [( )] Только при использовании сверточных нейронных сетей.
 
 
-
-
-
-
-## Основные парадигмы машинного обучения
-
-                           --{{0}}--
-Поскольку не все шрифты доступны на всех компьютерах (существуют тысячи шрифтов и большинство из них не бесплатны), CSS предусматривает резервную систему. Первым вы указываете шрифт, который хотели бы использовать. Затем следуют любые шрифты, которые вы могли бы использовать, если первый указанный шрифт не доступен. А закончить список вы должны типовым шрифтом, который имеет 5 видов: serif, sans-serif, monospace, cursive и fantasy. 
-
-> "_Let the editor be your canvas and the keyboard your brush._"
-
-
-## Обучение с учителем: основные принципы
-
-                           --{{0}}--
-As already mentioned all you need to work with LiaScript is an text-editor, but
-it can be usefull to apply one of the following tools. At least we apply them to
-see the result of a change within the course document immediately. You will see,
-that the development of online-courses will speed up, especially if there is no
-need for memorizing complex point and click sequences.
-
-> "_Let the editor be your canvas and the keyboard your brush._"
-
-
-## Обучение с учителем: регрессия
-
-                           --{{0}}--
-As already mentioned all you need to work with LiaScript is an text-editor, but
-it can be usefull to apply one of the following tools. At least we apply them to
-see the result of a change within the course document immediately. You will see,
-that the development of online-courses will speed up, especially if there is no
-need for memorizing complex point and click sequences.
-
-> "_Let the editor be your canvas and the keyboard your brush._"
-
-
-## Диагностика регрессионных моделей
-
-                           --{{0}}--
-As already mentioned all you need to work with LiaScript is an text-editor, but
-it can be usefull to apply one of the following tools. At least we apply them to
-see the result of a change within the course document immediately. You will see,
-that the development of online-courses will speed up, especially if there is no
-need for memorizing complex point and click sequences.
-
-> "_Let the editor be your canvas and the keyboard your brush._"
-
-
-## Бинарная классификация
-
-                           --{{0}}--
-As already mentioned all you need to work with LiaScript is an text-editor, but
-it can be usefull to apply one of the following tools. At least we apply them to
-see the result of a change within the course document immediately. You will see,
-that the development of online-courses will speed up, especially if there is no
-need for memorizing complex point and click sequences.
-
-> "_Let the editor be your canvas and the keyboard your brush._"
-
-
-## Многоклассовая классификация
-
-                           --{{0}}--
-As already mentioned all you need to work with LiaScript is an text-editor, but
-it can be usefull to apply one of the following tools. At least we apply them to
-see the result of a change within the course document immediately. You will see,
-that the development of online-courses will speed up, especially if there is no
-need for memorizing complex point and click sequences.
-
-> "_Let the editor be your canvas and the keyboard your brush._"
-
-
-## Байесовская классификация
-
-                           --{{0}}--
-As already mentioned all you need to work with LiaScript is an text-editor, but
-it can be usefull to apply one of the following tools. At least we apply them to
-see the result of a change within the course document immediately. You will see,
-that the development of online-courses will speed up, especially if there is no
-need for memorizing complex point and click sequences.
-
-> "_Let the editor be your canvas and the keyboard your brush._"
-
-
-## Логистическая регрессия
-
-                           --{{0}}--
-As already mentioned all you need to work with LiaScript is an text-editor, but
-it can be usefull to apply one of the following tools. At least we apply them to
-see the result of a change within the course document immediately. You will see,
-that the development of online-courses will speed up, especially if there is no
-need for memorizing complex point and click sequences.
-
-> "_Let the editor be your canvas and the keyboard your brush._"
