@@ -34,10 +34,6 @@ h1.lia-h1 {
   font-size: 12px !important;
 }
 
-.lia-quiz {
-  border-color: var(--main-bg-color) !important;
-}
-
 .lia-link {
   /* color: #00FF00 !important */
 }
@@ -98,6 +94,13 @@ li .lia-paragraph {
 /* .lia-quote .lia-paragraph:first-of-type {
   text-indent: 0;
 } */
+
+.lia-quiz {
+  border: 1px solid;
+  border-color: #55BBDD !important;
+  border-radius: 10px;
+  padding: 10px;
+}
 
 /* ---------------------------------------------------------------------------------- */
 .imgCentered {
