@@ -1,8 +1,8 @@
 <!--
-link: .\fpr_tpr.css
+link: ./fpr_tpr.css
 
-@prec_rec
-<div class="main-container">    
+@fpr_tpr
+<div class="fpr_tpr-container">    
     <div class="slider-container">
         <label for="thresholdSlider_@0">Порог:</label>
         <input type="range" id="thresholdSlider_@0" min="-@1" max="@1" step="@2" value="0">
@@ -11,13 +11,13 @@ link: .\fpr_tpr.css
     
     <div class="visualization-container">
         <div class="ellipse-container">
-            <h3>Recall</h3>
+            <h3>FPR</h3>
             <div class="metrics-container" id="fprValue_@0">0.00</div>
             <canvas id="fprCanvas_@0" width="250" height="250"></canvas>
         </div>
         
         <div class="ellipse-container">
-            <h3>Precision</h3>
+            <h3>TPR</h3>
             <div class="metrics-container" id="tprValue_@0">0.00</div>
             <canvas id="tprCanvas_@0" width="250" height="250"></canvas>
         </div>
@@ -38,17 +38,17 @@ link: .\fpr_tpr.css
     };
 
     // Color configurations
-    const fprColors = { //recall
+    const fprColors = {
+        tpColor: [242, 242, 242],
+        fnColor: [242, 242, 242],
+        fpColor: [158, 219, 235],
+        tnColor: [235, 0, 0]
+    };
+
+    const tprColors = {
         tpColor: [0, 125, 187],
         fnColor: [255, 170, 79],
         fpColor: [242, 242, 242],
-        tnColor: [242, 242, 242]
-    };
-
-    const tprColors = { // precision
-        tpColor: [0, 125, 187],
-        fnColor: [242, 242, 242],
-        fpColor: [158, 219, 235],
         tnColor: [242, 242, 242]
     };
 
@@ -166,13 +166,8 @@ link: .\fpr_tpr.css
         const tp = counts.tp;
         const fn = counts.fn;
         
-        let precision = tp / (tp + fp)
-        if (config.angleDeg == 89.99){
-            precision = 0.5
-        }
-
-        const fpr = tp / (tp + fn);     //recall
-        const tpr = precision;     //precision
+        const fpr = fp / (fp + tn);
+        const tpr = tp / (tp + fn);
         
         // Update metric displays
         if (isFPR) {
@@ -292,19 +287,21 @@ link: .\fpr_tpr.css
 @end
 -->
 
-# prec_rec
+# fpr_tpr
 
-@prec_rec(0, 2.4, 0.1, 60)
+@fpr_tpr(0, 2.4, 0.1, 60)
 
-@prec_rec(1, 0.8, 0.1, 0)
+@fpr_tpr(1, 0.8, 0.1, 0)
 
-@prec_rec(2, 7500, 1000, 89.99)
+@fpr_tpr(2, 7500, 1000, 89.99)
 
 ```
-@prec_rec(
-    0,               // ID элемента
+@fpr_tpr(0, 60, 2.4, 0.1)
+
+@fpr_tpr(
+    3,               // ID элемента
+    60,              // angleDeg
     1.0,             // sliderMax
     0.1,             // sliderStep
-    60,              // angleDeg
 )
 ```

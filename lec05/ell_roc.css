@@ -1,0 +1,48 @@
+.ell_roc-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ell_roc-container {
+    .visualization-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .ellipse-container, .roc-container {
+        position: relative;
+    }
+    .controls {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f0f0f0;
+        border-radius: 8px;
+    }
+    .slider-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .slider-container label {
+        width: 120px;
+        font-weight: bold;
+    }
+    .slider-value {
+        width: 50px;
+        text-align: center;
+        margin-left: 10px;
+    }
+    canvas {
+        display: block;
+        background-color: white;
+        border: 1px solid #ddd;
+    }
+    .classifier-selector {
+        margin-bottom: 15px;
+    }
+}

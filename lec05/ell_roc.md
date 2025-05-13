@@ -1,8 +1,9 @@
 <!--
-link: .\ell_pr.css
+link: ./ell_roc.css
 
-@ell_pr
-<div class="container">    
+@ell_roc
+
+<div class="ell_roc-container">    
     <div class="controls">
         <div class="classifier-selector">
             <label for="classifier-type@0">Выберите тип классификатора:</label>
@@ -24,26 +25,26 @@ link: .\ell_pr.css
         <div class="ellipse-container">
             <canvas id="ellipseCanvas@0" width="350" height="350"></canvas>
         </div>
-        <div class="pr-container">
-            <canvas id="prCanvas@0" width="350" height="350"></canvas>
+        <div class="roc-container">
+            <canvas id="rocCanvas@0" width="350" height="350"></canvas>
         </div>
     </div>
 </div>
 
 <script>
     // Получаем элементы DOM
-    const prCanvas = document.getElementById('prCanvas@0');
-    const prCtx = prCanvas.getContext('2d');
+    const rocCanvas = document.getElementById('rocCanvas@0');
+    const rocCtx = rocCanvas.getContext('2d');
     const ellipseCanvas = document.getElementById('ellipseCanvas@0');
     const ellipseCtx = ellipseCanvas.getContext('2d');
     const thresholdSlider = document.getElementById('threshold@0');
     const thresholdValue = document.getElementById('threshold-value@0');
     const classifierType = document.getElementById('classifier-type@0');
     
-    // Размеры графика PR
-    const prPadding = 50;
-    const prWidth = prCanvas.width - 2 * prPadding;
-    const prHeight = prCanvas.height - 2 * prPadding;
+    // Размеры графика ROC
+    const rocPadding = 50;
+    const rocWidth = rocCanvas.width - 2 * rocPadding;
+    const rocHeight = rocCanvas.height - 2 * rocPadding;
     
     // Конфигурация для эллипса
     const ellipseConfig = {
@@ -61,7 +62,7 @@ link: .\ell_pr.css
         plotRange: 1.5
     };
     
-    // Переменные для распределений данных PR
+    // Переменные для распределений данных ROC
     let positiveSamples = [];
     let negativeSamples = [];
     
@@ -104,27 +105,22 @@ link: .\ell_pr.css
         return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
     }
     
-    // Вычисление точки на PR кривой для данного порога
-    function calculatePrPoint(threshold) {
+    // Вычисление точки на ROC кривой для данного порога
+    function calculateRocPoint(threshold) {
         const TP = positiveSamples.filter(score => score >= threshold).length;
         const FP = negativeSamples.filter(score => score >= threshold).length;
         const FN = positiveSamples.filter(score => score < threshold).length;
         const TN = negativeSamples.filter(score => score < threshold).length;
         
-        const Recall = TP / (TP + FN); // Recall = Sensitivity = TPR
-        let Precision = 0;
-        if ((TP + FP) > 0) {
-            Precision = TP / (TP + FP);
-        } else {
-            Precision = 1; // Если нет положительных предсказаний, Precision=1 по определению
-        }
+        const TPR = TP / (TP + FN); // sensitivity
+        const FPR = FP / (FP + TN); // 1 - specificity
         
-        return { Recall, Precision, TP, FP, FN, TN };
+        return { FPR, TPR, TP, FP, FN, TN };
     }
     
-    // Вычисление полной PR кривой
-    function calculatePrCurve() {
-        const thresholds = [1.01]; // Начинаем с порога выше 1, чтобы получить точку (0,1)
+    // Вычисление полной ROC кривой
+    function calculateRocCurve() {
+        const thresholds = [1.01]; // Начинаем с порога выше 1, чтобы получить точку (0,0)
         
         // Создание отсортированного набора уникальных порогов
         const allScores = [...positiveSamples, ...negativeSamples].sort((a, b) => b - a);
@@ -134,167 +130,138 @@ link: .\ell_pr.css
             }
         }
         
-        thresholds.push(-0.01); // Добавляем порог ниже 0, чтобы получить крайнюю точку
+        thresholds.push(-0.01); // Добавляем порог ниже 0, чтобы получить точку (1,1)
         
-        // Вычисление точек PR кривой
-        return thresholds.map(threshold => calculatePrPoint(threshold));
+        // Вычисление точек ROC кривой
+        return thresholds.map(threshold => calculateRocPoint(threshold));
     }
     
-    // Функция для рисования PR кривой
-    function drawPrCurve(threshold) {
+    // Функция для рисования ROC кривой
+    function drawRocCurve(threshold) {
         // Очистка канваса
-        prCtx.clearRect(0, 0, prCanvas.width, prCanvas.height);
+        rocCtx.clearRect(0, 0, rocCanvas.width, rocCanvas.height);
         
         // Рисование осей
-        prCtx.lineWidth = 1;
-        prCtx.strokeStyle = '#000';
-        prCtx.beginPath();
+        rocCtx.lineWidth = 1;
+        rocCtx.strokeStyle = '#000';
+        rocCtx.beginPath();
         
         // Ось X
-        prCtx.moveTo(prPadding, prCanvas.height - prPadding);
-        prCtx.lineTo(prCanvas.width - prPadding, prCanvas.height - prPadding);
+        rocCtx.moveTo(rocPadding, rocCanvas.height - rocPadding);
+        rocCtx.lineTo(rocCanvas.width - rocPadding, rocCanvas.height - rocPadding);
         // Ось Y
-        prCtx.moveTo(prPadding, prCanvas.height - prPadding);
-        prCtx.lineTo(prPadding, prPadding);
-        prCtx.stroke();
+        rocCtx.moveTo(rocPadding, rocCanvas.height - rocPadding);
+        rocCtx.lineTo(rocPadding, rocPadding);
+        rocCtx.stroke();
         
         // Метки осей
-        prCtx.fillStyle = '#000';
-        prCtx.font = '12px Arial';
-        prCtx.textAlign = 'center';
+        rocCtx.fillStyle = '#000';
+        rocCtx.font = '12px Arial';
+        rocCtx.textAlign = 'center';
         
-        // Метки оси X (Recall)
-        prCtx.fillText('Recall (Полнота)', prCanvas.width / 2, prCanvas.height - 10);
+        // Метки оси X
+        rocCtx.fillText('1 - Специфичность (FPR)', rocCanvas.width / 2, rocCanvas.height - 10);
         for (let i = 0; i <= 10; i++) {
-            const x = prPadding + (i / 10) * prWidth;
-            prCtx.beginPath();
-            prCtx.moveTo(x, prCanvas.height - prPadding);
-            prCtx.lineTo(x, prCanvas.height - prPadding + 5);
-            prCtx.stroke();
-            prCtx.fillText(i / 10, x, prCanvas.height - prPadding + 20);
+            const x = rocPadding + (i / 10) * rocWidth;
+            rocCtx.beginPath();
+            rocCtx.moveTo(x, rocCanvas.height - rocPadding);
+            rocCtx.lineTo(x, rocCanvas.height - rocPadding + 5);
+            rocCtx.stroke();
+            rocCtx.fillText(i / 10, x, rocCanvas.height - rocPadding + 20);
         }
         
-        // Метки оси Y (Precision)
-        prCtx.save();
-        prCtx.translate(15, prCanvas.height / 2);
-        prCtx.rotate(-Math.PI / 2);
-        prCtx.fillText('Precision (Точность)', 0, 0);
-        prCtx.restore();
+        // Метки оси Y
+        rocCtx.save();
+        rocCtx.translate(15, rocCanvas.height / 2);
+        rocCtx.rotate(-Math.PI / 2);
+        rocCtx.fillText('Чувствительность (TPR)', 0, 0);
+        rocCtx.restore();
         
         for (let i = 0; i <= 10; i++) {
-            const y = prCanvas.height - prPadding - (i / 10) * prHeight;
-            prCtx.beginPath();
-            prCtx.moveTo(prPadding, y);
-            prCtx.lineTo(prPadding - 5, y);
-            prCtx.stroke();
-            prCtx.textAlign = 'right';
-            prCtx.fillText(i / 10, prPadding - 10, y + 4);
+            const y = rocCanvas.height - rocPadding - (i / 10) * rocHeight;
+            rocCtx.beginPath();
+            rocCtx.moveTo(rocPadding, y);
+            rocCtx.lineTo(rocPadding - 5, y);
+            rocCtx.stroke();
+            rocCtx.textAlign = 'right';
+            rocCtx.fillText(i / 10, rocPadding - 10, y + 4);
         }
         
-        // Рисование линии случайного классификатора (горизонтальная линия)
-        const selectedType = classifierType.value;
-        if (selectedType === 'random') {
-            // Для случайного классификатора горизонтальная линия на уровне Precision = P/(P+N)
-            const P = positiveSamples.length;
-            const N = negativeSamples.length;
-            const randomPrecision = P / (P + N);
+        // Рисование линии случайного классификатора (диагональ)
+        rocCtx.beginPath();
+        rocCtx.strokeStyle = 'grey';
+        rocCtx.setLineDash([5, 3]);
+        rocCtx.moveTo(rocPadding, rocCanvas.height - rocPadding);
+        rocCtx.lineTo(rocCanvas.width - rocPadding, rocPadding);
+        rocCtx.stroke();
+        rocCtx.setLineDash([]);
+        
+        // Вычисление и рисование ROC кривой
+        const rocPoints = calculateRocCurve();
+        
+        rocCtx.beginPath();
+        rocCtx.strokeStyle = 'blue';
+        rocCtx.lineWidth = 2;
+        
+        rocPoints.forEach((point, index) => {
+            const x = rocPadding + point.FPR * rocWidth;
+            const y = rocCanvas.height - rocPadding - point.TPR * rocHeight;
             
-            prCtx.beginPath();
-            prCtx.strokeStyle = 'grey';
-            prCtx.setLineDash([5, 3]);
-            const y = prCanvas.height - prPadding - randomPrecision * prHeight;
-            prCtx.moveTo(prPadding, y);
-            prCtx.lineTo(prCanvas.width - prPadding, y);
-            prCtx.stroke();
-            prCtx.setLineDash([]);
-        }
-        
-        // Вычисление и рисование PR кривой
-        const prPoints = calculatePrCurve();
-        
-        prCtx.beginPath();
-        prCtx.strokeStyle = 'blue';
-        prCtx.lineWidth = 2;
-
-        // Сортируем точки по Recall для правильного рисования кривой
-        prPoints.sort((a, b) => a.Recall - b.Recall);
-        
-        let firstValidPoint = true;
-        
-        prPoints.forEach((point, index) => {
-            const x = prPadding + point.Recall * prWidth;
-            const y = prCanvas.height - prPadding - point.Precision * prHeight;
-            
-            // Проверяем, что координаты валидны
-            if (!isNaN(x) && !isNaN(y)) {
-                if (firstValidPoint) {
-                    prCtx.moveTo(x, y);
-                    firstValidPoint = false;
-                } else {
-                    prCtx.lineTo(x, y);
-                }
+            if (index === 0) {
+                rocCtx.moveTo(x, y);
+            } else {
+                rocCtx.lineTo(x, y);
             }
         });
         
-        prCtx.stroke();
+        rocCtx.stroke();
         
-        // Рисование текущей точки на PR кривой для выбранного порога
-        const currentPoint = calculatePrPoint(threshold);
+        // Рисование текущей точки на ROC кривой для выбранного порога
+        const currentPoint = calculateRocPoint(threshold);
         
-        const x = prPadding + currentPoint.Recall * prWidth;
-        const y = prCanvas.height - prPadding - currentPoint.Precision * prHeight;
+        const x = rocPadding + currentPoint.FPR * rocWidth;
+        const y = rocCanvas.height - rocPadding - currentPoint.TPR * rocHeight;
         
-        prCtx.beginPath();
-        prCtx.fillStyle = 'red';
-        prCtx.arc(x, y, 6, 0, 2 * Math.PI);
-        prCtx.fill();
+        rocCtx.beginPath();
+        rocCtx.fillStyle = 'red';
+        rocCtx.arc(x, y, 6, 0, 2 * Math.PI);
+        rocCtx.fill();
         
-        // Вычисление и отображение AP (Average Precision - площади под PR кривой)
-        const ap = calculateAP(prPoints);
-        prCtx.fillStyle = '#000';
-        prCtx.textAlign = 'right';
-        prCtx.fillText(`AP: ${ap.toFixed(3)}`, prCanvas.width - prPadding, prPadding - 10);
+        // Вычисление и отображение AUC (площади под кривой)
+        const auc = calculateAUC(rocPoints);
+        rocCtx.fillStyle = '#000';
+        rocCtx.textAlign = 'right';
+        rocCtx.fillText(`AUC: ${auc.toFixed(3)}`, rocCanvas.width - rocPadding, rocPadding - 10);
         
         // Отображение текущих координат точки
-        prCtx.fillText(`Текущая точка: (${currentPoint.Recall.toFixed(2)}, ${currentPoint.Precision.toFixed(2)})`, 
-                    prCanvas.width - prPadding, prPadding - 30);
+        rocCtx.fillText(`Текущая точка: (${currentPoint.FPR.toFixed(2)}, ${currentPoint.TPR.toFixed(2)})`, 
+                    rocCanvas.width - rocPadding, rocPadding - 30);
         
-        // Отображение текущих Recall и Precision значений
-        prCtx.textAlign = 'left';
-        prCtx.fillText(`Recall: ${currentPoint.Recall.toFixed(3)}`, prPadding + 10, prPadding - 10);
-        prCtx.fillText(`Precision: ${currentPoint.Precision.toFixed(3)}`, prPadding + 10, prPadding - 30);
+        // Отображение текущих TPR и FPR значений
+        rocCtx.textAlign = 'left';
+        rocCtx.fillText(`TPR: ${currentPoint.TPR.toFixed(3)}`, rocPadding + 10, rocPadding - 10);
+        rocCtx.fillText(`FPR: ${currentPoint.FPR.toFixed(3)}`, rocPadding + 10, rocPadding - 30);
         
         // Показать текущие значения TP, FP, TN, FN
-        prCtx.textAlign = 'left';
-        prCtx.fillText(`TP: ${currentPoint.TP}`, prPadding + 10, prPadding - 50);
-        prCtx.fillText(`FP: ${currentPoint.FP}`, prPadding + 10, prPadding - 70);
-        prCtx.fillText(`TN: ${currentPoint.TN}`, prPadding + 120, prPadding - 50);
-        prCtx.fillText(`FN: ${currentPoint.FN}`, prPadding + 120, prPadding - 70);
+        rocCtx.textAlign = 'left';
+        rocCtx.fillText(`TP: ${currentPoint.TP}`, rocPadding + 10, rocPadding - 50);
+        rocCtx.fillText(`FP: ${currentPoint.FP}`, rocPadding + 10, rocPadding - 70);
+        rocCtx.fillText(`TN: ${currentPoint.TN}`, rocPadding + 120, rocPadding - 50);
+        rocCtx.fillText(`FN: ${currentPoint.FN}`, rocPadding + 120, rocPadding - 70);
         
         return currentPoint;
     }
     
-    // Вычисление Average Precision (AP) - площади под PR кривой
-    function calculateAP(prPoints) {
-        // Отсортируем точки по Recall для корректного расчета
-        prPoints.sort((a, b) => a.Recall - b.Recall);
-        
-        let ap = 0;
-        
-        // Используем метод трапеций для аппроксимации площади под кривой
-        for (let i = 1; i < prPoints.length; i++) {
-            // Ширина трапеции
-            const deltaRecall = prPoints[i].Recall - prPoints[i-1].Recall;
-            // Средняя высота трапеции
-            const avgPrecision = (prPoints[i].Precision + prPoints[i-1].Precision) / 2;
-            
-            // Площадь трапеции
-            if (deltaRecall > 0) {  // Чтобы избежать ошибок при одинаковых Recall
-                ap += deltaRecall * avgPrecision;
-            }
+    // Вычисление площади под ROC кривой (AUC)
+    function calculateAUC(rocPoints) {
+        let auc = 0;
+        for (let i = 1; i < rocPoints.length; i++) {
+            // Метод трапеций для вычисления AUC
+            const width = rocPoints[i].FPR - rocPoints[i-1].FPR;
+            const height = (rocPoints[i].TPR + rocPoints[i-1].TPR) / 2;
+            auc += width * height;
         }
-        
-        return ap;
+        return auc;
     }
     
     // Функция для рисования эллипса с разделяющей линией
@@ -305,20 +272,12 @@ link: .\ell_pr.css
         
         // Преобразование нормализованного порога (0-1) в значение для эллипса
         let addValue;
-        
         if (selectedType == 'perfect' && normalizedThreshold >= 0.25 && normalizedThreshold <= 0.75) {
             addValue = 0;
-        }
-        else if (selectedType == 'perfect' && normalizedThreshold < 0.25) {
-            addValue = config.sliderMin + normalizedThreshold * (0 - config.sliderMin);
-        }
-        else if (selectedType == 'perfect' && normalizedThreshold > 0.75) {
-            addValue = 0 + normalizedThreshold * (config.sliderMax - 0);
         }
         else {
             addValue = config.sliderMin + normalizedThreshold * (config.sliderMax - config.sliderMin);
         }
-        
         const add = addValue;
         
         // Очистка canvas
@@ -476,8 +435,8 @@ link: .\ell_pr.css
         const threshold = parseFloat(thresholdSlider.value);
         thresholdValue.textContent = threshold.toFixed(2);
         
-        // Обновление PR-кривой
-        const currentPoint = drawPrCurve(threshold);
+        // Обновление ROC-кривой
+        const currentPoint = drawRocCurve(threshold);
         
         // Обновление эллипса
         drawEllipse(threshold);
@@ -489,6 +448,7 @@ link: .\ell_pr.css
 @end
 -->
 
-# ell_pr
+# ell_roc
 
-@ell_pr(0)
+@ell_roc(0)
+@ell_roc(1)
