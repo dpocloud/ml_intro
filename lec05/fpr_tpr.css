@@ -7,9 +7,8 @@
 .fpr_tpr-container {
     .visualization-container {
         display: flex;
-        gap: 40px;
+        justify-content: space-between;
         margin-bottom: 20px;
-        text-align: center;
     }
     .ellipse-container {
         display: flex;
