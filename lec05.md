@@ -5,7 +5,7 @@ attribute:  **Editor:** Daria Gudkova
 email:    
 date:       21/02/2025
 version:    0.1
-language:   ru
+language:   en
 narrator:   English
 
 icon:    ./icon.png
