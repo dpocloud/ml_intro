@@ -1,0 +1,141 @@
+.window-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(199, 199, 201, 0.885);
+}
+
+.window-container {
+    .controls {
+        gap: 10px;
+        display: flex;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .control-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+    }
+
+    label {
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 4px;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.3);
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        border: none;
+    }
+
+    .value-display {
+        font-size: 1em;
+        font-weight: bold;
+        color: #000000;
+        text-align: center;
+    }
+
+    .visualization {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    svg {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .data-point {
+        fill: #2c3e50;
+        stroke: #34495e;
+        stroke-width: 1;
+    }
+
+    .data-point.in-window {
+        fill: #e74c3c;
+        stroke: #c0392b;
+        stroke-width: 2;
+    }
+
+    .window {
+        fill: rgba(52, 152, 219, 0.3);
+        stroke: #3498db;
+        stroke-width: 2;
+    }
+
+    .density-curve {
+        fill: none;
+        stroke: #8e44ad;
+        stroke-width: 3;
+    }
+
+    .axis {
+        stroke: #2c3e50;
+        stroke-width: 2;
+    }
+
+    .axis-label {
+        fill: #2c3e50;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-size: 14px;
+        text-anchor: middle;
+    }
+
+    .formula {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-family: 'Courier New', monospace;
+        text-align: center;
+        font-size: 1em;
+    }
+
+    .button {
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        transition: transform 0.2s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+}
