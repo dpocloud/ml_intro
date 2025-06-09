@@ -1,0 +1,237 @@
+/* Изоляция макроса от глобальных стилей */
+.cm-container, 
+.cm-container * {
+    text-indent: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.cm-container {
+    max-width: 1500px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    font-family: sans-serif !important;
+}
+
+.cm-container h1 {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 10px !important;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.cm-container .subtitle {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 30px !important;
+    font-size: 1.1em;
+}
+
+.cm-container .controls {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px !important;
+    margin-bottom: 30px !important;
+}
+
+.cm-container .class-selector {
+    padding: 5px 10px !important;
+    margin: 0px 5px !important;
+    font-size: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cm-container .class-selector:hover, 
+.cm-container .class-selector:focus {
+    border-color: #667eea;
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+.cm-container .matrices-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.cm-container .matrix-section {
+    min-width: 350px;
+}
+
+.cm-container .matrix-section:first-child {
+    flex: 2;
+    max-width: 990px;
+}
+
+.cm-container .matrix-section:last-child {
+    flex: 1;
+    max-width: 490px;
+}
+
+.cm-container .matrix-title {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 15px !important;
+    color: #4a5568;
+}
+
+.cm-container .matrix {
+    display: grid;
+    gap: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.cm-container .multiclass-matrix {
+    grid-template-columns: auto auto repeat(5, 1fr);
+    grid-template-rows: auto auto repeat(5, 1fr);
+}
+
+.cm-container .binary-matrix {
+    grid-template-columns: auto auto auto repeat(2, 1fr);
+    grid-template-rows: auto auto repeat(2, 1fr);
+    max-width: 320px;
+}
+
+.cm-container .binary-matrix .cell {
+    min-height: 30px !important;
+    min-width: 30px !important;
+}
+
+.cm-container .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px !important;
+    min-width: 30px !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    line-height: 1 !important;
+}
+
+.cm-container .cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: left 0.5s ease;
+}
+
+.cm-container .cell:hover::before {
+    left: auto;
+}
+
+.cm-container .header-cell {
+    background: #4a5568;
+    color: white;
+    font-size: 12px;
+    padding: 5px !important;
+}
+
+.cm-container .class-header {
+    padding: 5px !important;
+}
+
+.cm-container .data-cell {
+    background: #f7fafc;
+    color: #2d3748;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.cm-container .current-class-diagonal {
+    background: #48bb78 !important;
+    color: white;
+}
+
+.cm-container .binary-cell {
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 3px solid transparent;
+}
+
+.cm-container .tp { background: #48bb78; color: white; }
+.cm-container .fp { background: #ed8936; color: white; }
+.cm-container .fn { background: #f56565; color: white; }
+.cm-container .tn { background: #4299e1; color: white; }
+
+/* Highlighting states */
+.cm-container .highlight-tp { 
+    background: #48bb78 !important; 
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(72, 187, 120, 0.6);
+}
+
+.cm-container .highlight-fp { 
+    background: #ed8936 !important; 
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(237, 137, 54, 0.6);
+}
+
+.cm-container .highlight-fn { 
+    background: #f56565 !important; 
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(245, 101, 101, 0.6);
+}
+
+.cm-container .highlight-tn { 
+    background: #4299e1 !important; 
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(66, 153, 225, 0.6);
+}
+
+@media (max-width: 768px) {
+    .cm-container .matrices-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .cm-container .matrix-section:first-child,
+    .cm-container .matrix-section:last-child {
+        flex: 1;
+        min-width: auto;
+        max-width: none;
+    }
+    
+    .cm-container .cell {
+        min-height: 35px !important;
+        min-width: 35px !important;
+        font-size: 11px;
+    }
+
+    .cm-container .binary-cell {
+        font-size: 12px;
+    }
+
+    .cm-container .binary-matrix .cell {
+        min-height: 30px !important;
+        min-width: 30px !important;
+    }
+}
