@@ -7,6 +7,7 @@
 @img04:   @img(04,@0,@1,@2)
 @img05:   @img(05,@0,@1,@2)
 @img06:   @img(06,@0,@1,@2)
+@img07:   @img(07,@0,@1,@2)
 
 @quizQuestion: <hr class="lia-divider"><p><b><span style="padding-right: 10px;">➪</span> @0</b></p>
 
