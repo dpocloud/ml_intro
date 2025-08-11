@@ -9,6 +9,11 @@
 @img06:   @img(06,@0,@1,@2)
 @img07:   @img(07,@0,@1,@2)
 
+@img_sem:     <img src="sem@0/imgs/@1" alt="@2" class="imgCentered" style="width: @3%;" />
+@img_sem01:   @img_sem(01,@0,@1,@2)
+@img_sem02:   @img_sem(02,@0,@1,@2)
+@img_sem03:   @img_sem(03,@0,@1,@2)
+
 @quizQuestion: <hr class="lia-divider"><p><b><span style="padding-right: 10px;">➪</span> @0</b></p>
 
 @NB:      <p style="border: 1px solid; border-radius: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;"><span style="font-size: 25px; color: red;">⚠</span> @0</p>
